@@ -11,6 +11,9 @@ var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
 
+// Load environment variables
+require('dotenv').load();
+
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
 mongoose.connection.on('error', function(err) {

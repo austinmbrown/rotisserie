@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Week = require('./week.model');
+var request = require('request');
 
 // Get list of weeks
 exports.index = function(req, res) {
@@ -13,11 +14,28 @@ exports.index = function(req, res) {
 
 // Get a single week
 exports.show = function(req, res) {
-  Week.findById(req.params.id, function (err, week) {
-    if(err) { return handleError(res, err); }
-    if(!week) { return res.status(404).send('Not Found'); }
-    return res.json(week);
+  request({
+    url: 'https://profootballapi.com/schedule',
+    method: 'POST',
+    json: {
+      api_key:'uIPATn27B8XDrZGl9OcE4YQibeSK6qCW',
+      year:'2015',
+      season_type:'REG',
+      week: req.params.id
+    }
+  }, function(error, response, body){
+    if(error) {
+      console.log(error);
+    } else {
+      return res.json(body);
+    }
   });
+
+  // Week.findById(req.params.id, function (err, week) {
+  //   if(err) { return handleError(res, err); }
+  //   if(!week) { return res.status(404).send('Not Found'); }
+  //   return res.json(week);
+  // });
 };
 
 // Creates a new week in the DB.
