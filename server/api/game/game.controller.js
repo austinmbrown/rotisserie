@@ -2,21 +2,46 @@
 
 var _ = require('lodash');
 var Game = require('./game.model');
+var request = require('request');
 
-// Get list of games
+// Get list of games for a given week
 exports.index = function(req, res) {
-  Game.find(function (err, games) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(games);
+  request({
+    url: 'https://profootballapi.com/schedule',
+    method: 'POST',
+    json: {
+      api_key: process.env.API_KEY,
+      year:'2015',
+      season_type:'REG',
+      week: req.params.id
+    }
+  }, function(error, response, body){
+    if(error) {
+      console.log(error);
+    } else {
+      return res.json(body);
+    }
   });
 };
 
 // Get a single game
 exports.show = function(req, res) {
-  Game.findById(req.params.id, function (err, game) {
-    if(err) { return handleError(res, err); }
-    if(!game) { return res.status(404).send('Not Found'); }
-    return res.json(game);
+  request({
+    url: 'https://profootballapi.com/schedule',
+    method: 'POST',
+    json: {
+      api_key: process.env.API_KEY,
+      year:'2015',
+      season_type:'REG',
+      week: req.params.id
+    }
+  }, function(error, response, body){
+    if(error) {
+      console.log(error);
+    } else {
+      var game_object = _.findWhere(body, {id: parseInt(req.params.gameId)});
+      return res.json(game_object);
+    }
   });
 };
 

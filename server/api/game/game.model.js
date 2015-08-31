@@ -4,9 +4,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var GameSchema = new Schema({
-  week: {type: Schema.ObjectId, ref: 'WeekSchema'},
-  homeTeam: {type: Schema.ObjectId, ref: 'TeamSchema'},
-  awayTeam: {type: Schema.ObjectId, ref: 'TeamSchema'}
+  week: Number,
+  homeTeam: String,
+  awayTeam: String,
+  winner: String
 });
 
 module.exports = mongoose.model('Game', GameSchema);
