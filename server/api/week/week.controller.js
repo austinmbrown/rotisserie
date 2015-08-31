@@ -18,7 +18,7 @@ exports.show = function(req, res) {
     url: 'https://profootballapi.com/schedule',
     method: 'POST',
     json: {
-      api_key:'uIPATn27B8XDrZGl9OcE4YQibeSK6qCW',
+      api_key: process.env.API_KEY,
       year:'2015',
       season_type:'REG',
       week: req.params.id
@@ -30,12 +30,6 @@ exports.show = function(req, res) {
       return res.json(body);
     }
   });
-
-  // Week.findById(req.params.id, function (err, week) {
-  //   if(err) { return handleError(res, err); }
-  //   if(!week) { return res.status(404).send('Not Found'); }
-  //   return res.json(week);
-  // });
 };
 
 // Creates a new week in the DB.
