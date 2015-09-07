@@ -6,9 +6,20 @@ var request = require('request');
 
 // Get list of weeks
 exports.index = function(req, res) {
-  Week.find(function (err, weeks) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(weeks);
+  request({
+    url: 'https://profootballapi.com/schedule',
+    method: 'POST',
+    json: {
+      api_key: process.env.API_KEY,
+      year:'2015',
+      season_type:'REG'
+    }
+  }, function(error, response, body){
+    if(error) {
+      console.log(error);
+    } else {
+      return res.json(body);
+    }
   });
 };
 
@@ -19,7 +30,7 @@ exports.show = function(req, res) {
     method: 'POST',
     json: {
       api_key: process.env.API_KEY,
-      year:'2015',
+      year:'2014',
       season_type:'REG',
       week: req.params.id
     }

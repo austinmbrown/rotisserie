@@ -11,3 +11,13 @@ var PickSchema = new Schema({
 });
 
 module.exports = mongoose.model('Pick', PickSchema);
+
+PickSchema.methods = {
+  evaluateCorrect: function() {
+    // get the game via /api/weeks/:weekId/games/:gameId
+    // if final == 1
+    // compare home_score and away_score determines winner
+    // winner == pick
+    // return boolean
+  }
+}

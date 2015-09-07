@@ -2,6 +2,7 @@
 
 angular.module('rotisserieApp', [
   'ngCookies',
+  'ngMaterial',
   'ngResource',
   'ngSanitize',
   'ngRoute'
@@ -9,7 +10,7 @@ angular.module('rotisserieApp', [
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/weeks'
       });
 
     $locationProvider.html5Mode(true);

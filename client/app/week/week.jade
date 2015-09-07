@@ -1,2 +1,72 @@
-.col-md-12
-    | This is the week view.
+md-content(ng-switch="" on="weekSelection")
+  div.week(ng-click="weekSelection=1")
+    h3 Week 1
+    md-list(ng-switch-when="1")
+      md-list-item.game(ng-repeat="game in weeks[0]") {{game.away}} vs. {{game.home}}
+        md-slider(md-discrete="" step="1" min="0" max="1" ng-model="game.pick" flex="80" ng-mouseup="setPick(game)")
+
+  div.week(ng-click="weekSelection=2")
+    h3 Week 2
+    md-list(ng-switch-when="2")
+      md-list-item.game(ng-repeat="game in weeks[1]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=3")
+    h3 Week 3
+    md-list(ng-switch-when="3")
+      md-list-item.game(ng-repeat="game in weeks[2]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=4")
+    h3 Week 4
+    md-list(ng-switch-when="4")
+      md-list-item.game(ng-repeat="game in weeks[3]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=5")
+    h3 Week 5
+    md-list(ng-switch-when="5")
+      md-list-item.game(ng-repeat="game in weeks[4]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=6")
+    h3 Week 6
+    md-list(ng-switch-when="6")
+      md-list-item.game(ng-repeat="game in weeks[5]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=7")
+    h3 Week 7
+    md-list(ng-switch-when="7")
+      md-list-item.game(ng-repeat="game in weeks[6]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=8")
+    h3 Week 8
+    md-list(ng-switch-when="8")
+      md-list-item.game(ng-repeat="game in weeks[7]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=9")
+    h3 Week 9
+    md-list(ng-switch-when="9")
+      md-list-item.game(ng-repeat="game in weeks[8]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=10")
+    h3 Week 10
+    md-list(ng-switch-when="10")
+      md-list-item.game(ng-repeat="game in weeks[9]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=11")
+    h3 Week 11
+    md-list(ng-switch-when="11")
+      md-list-item.game(ng-repeat="game in weeks[10]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=12")
+    h3 Week 12
+    md-list(ng-switch-when="12")
+      md-list-item.game(ng-repeat="game in weeks[11]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=13")
+    h3 Week 13
+    md-list(ng-switch-when="13")
+      md-list-item.game(ng-repeat="game in weeks[12]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=14")
+    h3 Week 14
+    md-list(ng-switch-when="14")
+      md-list-item.game(ng-repeat="game in weeks[13]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=15")
+    h3 Week 15
+    md-list(ng-switch-when="15")
+      md-list-item.game(ng-repeat="game in weeks[14]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=16")
+    h3 Week 16
+    md-list(ng-switch-when="16")
+      md-list-item.game(ng-repeat="game in weeks[15]") {{game.away}} vs. {{game.home}}
+  div.week(ng-click="weekSelection=17")
+    h3 Week 17
+    md-list(ng-switch-when="17")
+      md-list-item.game(ng-repeat="game in weeks[16]") {{game.away}} vs. {{game.home}}
+

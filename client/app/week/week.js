@@ -3,7 +3,7 @@
 angular.module('rotisserieApp')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/week', {
+      .when('/weeks', {
         templateUrl: 'app/week/week.html',
         controller: 'WeekCtrl'
       })
