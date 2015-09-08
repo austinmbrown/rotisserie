@@ -2,8 +2,11 @@ md-content(ng-switch="" on="weekSelection")
   div.week(ng-click="weekSelection=1")
     h3 Week 1
     md-list(ng-switch-when="1")
-      md-list-item.game(ng-repeat="game in weeks[0]") {{game.away}} vs. {{game.home}}
-        md-slider(md-discrete="" step="1" min="0" max="1" ng-model="game.pick" flex="80" ng-mouseup="setPick(game)")
+      md-list-item.game(ng-repeat="game in weeks[0]")
+        .md-button.md-raised(ng-click="setPick(game, game.away)" ng-class="{'md-primary': game.pick==game.away}") {{game.away}}
+        span vs.
+        .md-button.md-raised(ng-click="setPick(game, game.home)" ng-class="{'md-primary': game.pick==game.home}") {{game.home}}
+        //- md-slider(md-discrete="" step="1" min="0" max="1" ng-model="picks[game.id]" flex="80")
 
   div.week(ng-click="weekSelection=2")
     h3 Week 2

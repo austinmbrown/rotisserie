@@ -7,32 +7,27 @@ angular.module('rotisserieApp')
       for (var i = 1; i <= 17; i++) {
         $scope.weeks.push(
           weekData.filter(function(game){
-            game["pick"] = 0.5;
+            game["pick"] = "";
             return game['week']==i;
           })
         );
       };
       console.log($scope.weeks)
     });
-    $scope.setPick = function(pickedGame) {
+    // $scope.$watch('picks', function(){
+    //   console.log('pick made');
+    // });
+
+    $scope.setPick = function(pickedGame, pickedTeam) {
       console.log(pickedGame);
+      console.log(pickedTeam);
+      pickedGame.pick = pickedTeam;
       // console.log(user);
-      console.log($scope.translatePick(pickedGame))
       // $http.post('/api/users/' + user.id + '/picks', {
       //   user:
       //   game: game.id
       //   pick:
       // })
-    };
-    $scope.translatePick = function(translatedGame) {
-      console.log("translated game: ", translatedGame);
-      if (translatedGame.pick == 1) {
-        return translatedGame.home;
-      } else if (translatedGame.pick == 0) {
-        return translatedGame.away;
-      } else {
-        return "You haven't made a pick yet.";
-      }
     };
   })
   .controller('WeekShowCtrl', function ($scope, $http, $routeParams) {
