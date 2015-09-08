@@ -5,10 +5,7 @@ angular.module('rotisserieApp')
     $routeProvider
       .when('/weeks', {
         templateUrl: 'app/week/week.html',
-        controller: 'WeekCtrl'
-      })
-      .when('/week/:id', {
-        templateUrl: 'app/week/weekShow.html',
-        controller: 'WeekShowCtrl'
+        controller: 'WeekCtrl',
+        authenticate: true
       });
   });

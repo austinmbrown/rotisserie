@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('rotisserieApp')
-  .controller('WeekCtrl', function ($scope, $http) {
+  .controller('WeekCtrl', function ($scope, $http, User) {
     $http.get('/api/weeks').success(function(weekData) {
       $scope.weeks = []
       for (var i = 1; i <= 17; i++) {
@@ -12,11 +12,7 @@ angular.module('rotisserieApp')
           })
         );
       };
-      console.log($scope.weeks)
     });
-    // $scope.$watch('picks', function(){
-    //   console.log('pick made');
-    // });
 
     $scope.setPick = function(pickedGame, pickedTeam) {
       console.log(pickedGame);
