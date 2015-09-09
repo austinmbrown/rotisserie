@@ -5,9 +5,18 @@ angular.module('rotisserieApp')
     $scope.weekSelection = thisweek;
     $scope.weeks = {};
     var user = Auth.getCurrentUser();
-    console.log(user._id);
+
+    $scope.kickedOff = function(game) {
+      var kickoffTime = moment.unix(game.time)
+      return moment().isAfter(kickoffTime)
+    }
 
     $scope.setPick = function(pickedGame, pickedTeam, pickId) {
+      if ($scope.kickedOff(pickedGame)) {
+        return console.log('too late');
+        // TODO: add visual feedback
+      };
+
       pickedGame.pick.pick = pickedTeam;
       if (pickId) {
         $http.put('/api/users/' + user._id + '/picks/' + pickId, {
@@ -25,7 +34,6 @@ angular.module('rotisserieApp')
     };
 
     $scope.$watch('weekSelection', function(){
-      console.log("week changed", $scope.weekSelection);
       $http.get('api/weeks/' + $scope.weekSelection + "/" + user._id).success(function(weekData) {
         $scope.weeks[$scope.weekSelection - 1] = weekData;
       })
