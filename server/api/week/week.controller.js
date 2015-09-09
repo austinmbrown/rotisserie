@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Week = require('./week.model');
+var Pick = require('../pick/pick.model');
 var request = require('request');
 
 // Get list of weeks
@@ -18,8 +19,20 @@ exports.index = function(req, res) {
     if(error) {
       console.log(error);
     } else {
-      return res.json(body);
-    }
+      Pick.find({user: req.params.userId}, function(err, picks) {
+        if(err) { return handleError(res, err); }
+        var gamesList = body.map(function(game){
+          game["pick"] = _.result(_.find(picks, function(userPick){
+            return userPick.game == game.id;
+          }), "pick");
+          if (!game["pick"]) {
+            game["pick"] = "";
+          }
+          return game
+        });
+        return res.json(gamesList);
+      });
+    };
   });
 };
 

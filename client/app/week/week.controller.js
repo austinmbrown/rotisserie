@@ -3,16 +3,16 @@
 angular.module('rotisserieApp')
   .controller('WeekCtrl', function ($scope, $http, Auth, User) {
     var user = Auth.getCurrentUser();
-
-    $http.get('/api/weeks').success(function(weekData) {
+    console.log(user._id);
+    $http.get('/api/weeks/' + user._id).success(function(weekData) {
       $scope.weeks = []
       for (var i = 1; i <= 17; i++) {
         $scope.weeks.push(
           weekData.filter(function(game){
-            game["pick"] = "";
             return game['week']==i;
           })
         );
+        console.log($scope.weeks)
       };
     });
 
