@@ -1,0 +1,6 @@
+md-content(ng-switch="" on="weekSelection")
+  div.standings
+    h3 Current Standings
+    md-list(ng-init="users={Austin:100, Cuyler:99, Deb:99, Kevin:90, Kurt:98, Sam:90, Tory:100}" ng-switch-when="1")
+      md-list-item.game(ng-repeat="user in users")
+        div
