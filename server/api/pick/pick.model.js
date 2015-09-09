@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var PickSchema = new Schema({
-  user: Number,
+  user: { type: Schema.ObjectId, ref: 'User' },
   game: Number,
   pick: String,
   correct: Boolean
