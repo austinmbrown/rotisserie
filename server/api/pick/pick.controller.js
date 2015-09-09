@@ -30,8 +30,9 @@ exports.create = function(req, res) {
 
 // Updates an existing pick in the DB.
 exports.update = function(req, res) {
+  console.log(req);
   if(req.body._id) { delete req.body._id; }
-  Pick.findById(req.params.id, function (err, pick) {
+  Pick.findById(req.params.pickId, function (err, pick) {
     if (err) { return handleError(res, err); }
     if(!pick) { return res.status(404).send('Not Found'); }
     var updated = _.merge(pick, req.body);

@@ -7,14 +7,21 @@ angular.module('rotisserieApp')
     var user = Auth.getCurrentUser();
     console.log(user._id);
 
-    $scope.setPick = function(pickedGame, pickedTeam) {
+    $scope.setPick = function(pickedGame, pickedTeam, pickId) {
       pickedGame.pick = pickedTeam;
       console.log(user._id);
-      $http.post('/api/users/' + user._id + '/picks', {
-        user: user._id,
-        game: pickedGame.id,
-        pick: pickedTeam
-      });
+      console.log(pickId);
+      if (pickId) {
+        $http.put('/api/users/' + user._id + '/picks/' + pickId, {
+          pick: pickedTeam
+        });
+      } else {
+        $http.post('/api/users/' + user._id + '/picks', {
+          user: user._id,
+          game: pickedGame.id,
+          pick: pickedTeam
+        });
+      };
     };
 
     $scope.$watch('weekSelection', function(){

@@ -18,5 +18,6 @@ router.post('/', controller.create);
 router.get('/:id/picks', pickController.index);
 router.post('/:id/picks', pickController.create);
 router.get('/:id/picks/:pickId', pickController.show);
+router.put('/:id/picks/:pickId', pickController.update);
 
 module.exports = router;
