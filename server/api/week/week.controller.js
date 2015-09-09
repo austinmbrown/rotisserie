@@ -38,12 +38,13 @@ exports.index = function(req, res) {
 
 // Get a single week
 exports.show = function(req, res) {
+  console.log(req.params);
   request({
     url: 'https://profootballapi.com/schedule',
     method: 'POST',
     json: {
       api_key: process.env.API_KEY,
-      year:'2014',
+      year:'2015',
       season_type:'REG',
       week: req.params.id
     }
@@ -51,7 +52,19 @@ exports.show = function(req, res) {
     if(error) {
       console.log(error);
     } else {
-      return res.json(body);
+      Pick.find({user: req.params.userId}, function(err, picks) {
+        if(err) { return handleError(res, err); }
+        var gamesList = body.map(function(game){
+          game["pick"] = _.result(_.find(picks, function(userPick){
+            return userPick.game == game.id;
+          }), "pick");
+          if (!game["pick"]) {
+            game["pick"] = "";
+          }
+          return game
+        });
+        return res.json(gamesList);
+      });
     }
   });
 };

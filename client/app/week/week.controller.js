@@ -2,19 +2,10 @@
 
 angular.module('rotisserieApp')
   .controller('WeekCtrl', function ($scope, $http, Auth, User) {
+    $scope.weekSelection = 1;
+    $scope.weeks = {};
     var user = Auth.getCurrentUser();
     console.log(user._id);
-    $http.get('/api/weeks/' + user._id).success(function(weekData) {
-      $scope.weeks = []
-      for (var i = 1; i <= 17; i++) {
-        $scope.weeks.push(
-          weekData.filter(function(game){
-            return game['week']==i;
-          })
-        );
-        console.log($scope.weeks)
-      };
-    });
 
     $scope.setPick = function(pickedGame, pickedTeam) {
       pickedGame.pick = pickedTeam;
@@ -25,11 +16,14 @@ angular.module('rotisserieApp')
         pick: pickedTeam
       });
     };
+
+    $scope.$watch('weekSelection', function(){
+      console.log("week changed", $scope.weekSelection);
+      $http.get('api/weeks/' + $scope.weekSelection + "/" + user._id).success(function(weekData) {
+        $scope.weeks[$scope.weekSelection - 1] = weekData;
+      })
+    })
   })
-  .controller('WeekShowCtrl', function ($scope, $http, $routeParams) {
-    $http.get('/api/weeks/' + $routeParams.id).success(function(weekData) {
-      $scope.games = weekData;
-    });
-  });
+
 
 

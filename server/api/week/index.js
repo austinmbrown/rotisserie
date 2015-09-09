@@ -7,7 +7,7 @@ var gameController = require('../game/game.controller');
 var router = express.Router();
 
 router.get('/:userId', controller.index);
-// router.get('/:id', controller.show);
+router.get('/:id/:userId', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
