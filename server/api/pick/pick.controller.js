@@ -30,7 +30,6 @@ exports.create = function(req, res) {
 
 // Updates an existing pick in the DB.
 exports.update = function(req, res) {
-  console.log(req);
   if(req.body._id) { delete req.body._id; }
   Pick.findById(req.params.pickId, function (err, pick) {
     if (err) { return handleError(res, err); }

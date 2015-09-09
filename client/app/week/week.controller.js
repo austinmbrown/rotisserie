@@ -8,9 +8,7 @@ angular.module('rotisserieApp')
     console.log(user._id);
 
     $scope.setPick = function(pickedGame, pickedTeam, pickId) {
-      pickedGame.pick = pickedTeam;
-      console.log(user._id);
-      console.log(pickId);
+      pickedGame.pick.pick = pickedTeam;
       if (pickId) {
         $http.put('/api/users/' + user._id + '/picks/' + pickId, {
           pick: pickedTeam
@@ -20,6 +18,8 @@ angular.module('rotisserieApp')
           user: user._id,
           game: pickedGame.id,
           pick: pickedTeam
+        }).success(function(newPick) {
+          pickedGame.pick = newPick;
         });
       };
     };
