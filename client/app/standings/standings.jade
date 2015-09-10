@@ -1,6 +1,8 @@
-md-content(ng-switch="" on="weekSelection")
+md-content
   div.standings
     h3 Current Standings
-    md-list(ng-init="users={Austin:100, Cuyler:99, Deb:99, Kevin:90, Kurt:98, Sam:90, Tory:100}" ng-switch-when="1")
-      md-list-item.game(ng-repeat="user in users")
-        div
+    md-list(ng-init="users=[{name:'Austin', score:100}, {name:'Cuyler', score:99}, {name:'Deb', score:99}, {name:'Kevin', score:90}, {name:'Kurt', score:98}, {name:'Sam', score:90}, {name:'Tory', score:100}]")
+      md-list-item(ng-repeat="user in users | orderBy:'-score'" ng-class="{first: $first}")
+        div.name {{user.name}}
+        div.score.md-secondary {{user.score}}
+        md-divider(ng-if="!$last")
